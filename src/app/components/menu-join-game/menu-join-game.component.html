@@ -1,0 +1,94 @@
+<div class="modal fade noselect" id="modalJoinGame" tabindex="-1" role="dialog" aria-labelledby="modalJoinGameLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalJoinGameLabel">
+          <h4 class="card-title">
+            <i class="material-icons"> videogame_asset</i>
+            Join Game
+          </h4>
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body" style="padding-top: 0px;">
+
+        <div>
+          <button class="btn btn-success btn-sm btn-fab btn-fab-mini btn-round" (click)="reloadGameList()">
+            <i class="material-icons">cached</i>
+          </button>
+        </div>
+
+        <div class="table-container">
+          <table class="table table-sm table-striped table-hover">
+            <thead>
+              <tr>
+                <th class="indexStyle" scope="col">#</th>
+                <th class="indexStyle" scope="col">Hoster</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <tr *ngFor="let item of gameList; let ind = index" (click)="joinGame(item)">
+                <th class="indexStyle" scope="row">{{ind+1}}</th>
+                <!-- <td class="indexStyle">
+                  <i class="material-icons" *ngIf="gamePasswordProtected">lock</i>
+                  <i class="material-icons" *ngIf="!gamePasswordProtected">lock_open</i>
+                </td> -->
+                <td>{{item.owner}}</td>
+              </tr>
+
+
+
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="reset" class="btn btn-secondary text-lower" data-dismiss="modal">Close</button>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+<div class="modal fade noselect" id="modalGamePassword" tabindex="-1" role="dialog"
+  aria-labelledby="modalGamePasswordLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalGamePasswordLabel">
+          <h4 class="card-title">
+            <i class="material-icons">lock</i>
+            Type Password for "{{gameName}}"
+          </h4>
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <form>
+
+        <div class="modal-body">
+          <div class="form-group bmd-form-group">
+            <label class="bmd-label-floating">Password</label>
+            <input type="text" class="form-control">
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="reset" class="btn btn-secondary text-lower" data-dismiss="modal">Close</button>
+          <button type="reset" class="btn btn-primary text-lower">Start Game</button>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,163 @@
+<div class="main-container noselect" (keydown.enter)="onSignInEnter()">
+
+  <h2 class="title text-center text-white noselect">Stock Market Simulation</h2>
+
+  <div class="login-card">
+    <div class="card sign-in-card">
+
+      <div class="card-header card-header-icon card-header-success">
+        <div class="card-icon">
+          <h4 class="card-title text-center"> <i class="material-icons">group</i> &nbsp; <span>Sign In To
+              Continue</span></h4>
+        </div>
+
+      </div>
+
+      <form autocomplete="off">
+
+        <div class="card-body">
+
+          <div class="credentials">
+
+            <div class="form-group username">
+              <label for="username">Username</label>
+              <input type="text" class="form-control" id="username" aria-describedby="usernameHelp"
+                placeholder="Type your username here" name="mSignInUserName" [(ngModel)]="mSignInUserName">
+              <small id="usernameHelp" class="form-text text-muted">Example - johndoe</small>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleInputEmail1">Password</label>
+              <input type="password" class="form-control" id="password" aria-describedby="passwordHelp"
+                placeholder="Type your password here" name="mSignInPassword" [(ngModel)]="mSignInPassword">
+
+            </div>
+
+          </div>
+
+          <div class="login-fail">
+            <p class="text-center incorrect" *ngIf="isUserNameOrPasswordIncorrect">{{signInErrorMessage}}</p>
+          </div>
+
+          <div>
+            <div class="form-group text-center btn-sign-in">
+              <button type="button" class="btn btn-success btn-round text-lower" (click)="userSignIn()">
+                <i class="material-icons">lock_open</i>&nbsp;Sign In
+              </button>
+            </div>
+            <small id="sign-up" class="form-text text-muted text-center pointer" data-toggle="modal"
+              data-target="#modalSignUp">Click here to Sign Up</small>
+          </div>
+
+          <small id="incorrectCredentials" class="form-text text-muted text-center">If Username or Password incorrect,
+            Please
+            contact Adminstrator</small>
+
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+
+</div>
+
+<div class="modal fade noselect" id="modalEndPoint" tabindex="-1" role="dialog" aria-labelledby="modalEndPointLabel"
+  aria-hidden="true" data-backdrop="false" (keydown.enter)="onGetServerPathEnter()">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title" id="modalEndPointLabel"><span class="title">Please Enter Server Path</span></div>
+        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button> -->
+      </div>
+      <div class="modal-body">
+
+        <div>
+          <div class="form-group">
+            <label for="serverPath">Server path</label>
+            <input type="text" class="form-control" id="serverPath" aria-describedby="sPathHelp"
+              placeholder="Enter your server path" name="mServerPath" [(ngModel)]="mServerPath">
+            <small id="sPathHelp" class="form-text text-muted endpoint-example">Example -
+              <b>SERVER_IP:PORT (192.168.X.XXX:9091)</b></small>
+          </div>
+
+        </div>
+
+        <div class="login-fail">
+          <p class="text-center incorrect" *ngIf="mIsURLCorrect">{{serverPathCheckMessage}}</p>
+        </div>
+
+        <div>
+
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success text-lower" (click)="getServerPath()">Save Server
+          Path</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalSignUp" tabindex="-1" role="dialog" aria-labelledby="modalmodalSignUp"
+  aria-hidden="true" (keydown.enter)="onSignUpEnter()">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title" id="modalmodalSignUp"><span class="title">Sign Up</span></div>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <form autocomplete="off">
+        <div class="modal-body">
+
+          <div>
+            <div class="form-group">
+              <label for="fullNameReg">Full name</label>
+              <input type="text" class="form-control" id="fullNameReg" aria-describedby="fullNameRegHelp"
+                placeholder="Enter your full name" name="mFullName" [(ngModel)]="mFullName">
+              <small id="fullNameRegHelp" class="form-text text-muted">Example - John Doe</small>
+            </div>
+
+            <div class="form-group">
+              <label for="usernameReg">Username</label>
+              <input type="text" class="form-control" id="usernameReg" aria-describedby="usernameRegHelp"
+                placeholder="Enter your username" name="mUserName" [(ngModel)]="mUserName">
+              <small id="usernameRegHelp" class="form-text text-muted">Example - johndoe</small>
+            </div>
+
+            <div class="form-group">
+              <label for="usernameReg1">Password</label>
+              <input type="password" class="form-control" id="usernameReg1" aria-describedby="usernameRegHelp1"
+                placeholder="Enter your password" name="mPassword" [(ngModel)]="mPassword">
+              <small id="usernameRegHelp1" class="form-text text-muted"></small>
+            </div>
+
+            <div class="form-group">
+              <label for="passwordReg2">Re-enter</label>
+              <input type="password" class="form-control" id="passwordReg2" aria-describedby="passwordRegHelp2"
+                placeholder="Re-enter your password" name="mRetypePassword" [(ngModel)]="mRetypePassword">
+              <small id="passwordRegHelp2" class="form-text text-muted"></small>
+            </div>
+
+          </div>
+
+          <div class="login-fail">
+            <p class="text-center incorrect" *ngIf="isPasswordsNotMatching">{{registerWarningMessage}}</p>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success text-lower" (click)="createUser()">Register</button>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+</div>

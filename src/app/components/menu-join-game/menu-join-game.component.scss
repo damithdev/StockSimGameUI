@@ -1,0 +1,26 @@
+i {
+    vertical-align: text-bottom;
+}
+
+.table-container {
+    margin-bottom: 1rem;
+    max-height: 18rem;
+    overflow: auto;
+}
+
+.table {
+    font-size: 14px;
+
+    i {
+        font-size: 16px;
+    }
+
+    tr:hover {
+        cursor: pointer;
+    }
+
+    .indexStyle {
+        width: 3rem;
+        padding-right: 1rem;
+    }
+}

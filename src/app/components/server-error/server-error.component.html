@@ -1,0 +1,32 @@
+<div class="server-error noselect">
+
+    <div class="main-header">
+      <h1 class="title text-center text-white">Hello Dr. Rem</h1>
+      <h2 class="title text-center text-white">
+        <i class="material-icons">
+          sentiment_dissatisfied
+        </i> Something Went Wrong !</h2>
+      <h3 class="title text-center text-white">Below Guys Responsible for this Error</h3>
+    </div>
+
+    <div class="img-container">
+      <!-- <img src="/assets/img/service-error.gif" alt="Serve Error Image"> -->
+      <div class="row">
+
+        <img *ngFor="let item of developers" [src]="'/assets/img/'+item+'.jpg'" alt="Backend developers"
+          class="developers-photo" draggable="false" data-toggle="tooltip" data-placement="bottom" title="{{item}}">
+
+      </div>
+    </div>
+
+    <div class="error-detail">
+      <h4 class="title text-center text-white">
+        This error occures when the game cannot communicate with the server,
+        <br>
+        please re-try again in few seconds. You'll automatically redirect to the the place your were
+      </h4>
+      <h5 class="title text-center text-white" data-toggle="tooltip" data-placement="bottom"
+        title="That means 'Internal Server Error'">Status Code 500 - You know what it means</h5>
+    </div>
+
+</div>

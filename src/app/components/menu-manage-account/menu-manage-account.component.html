@@ -1,0 +1,124 @@
+<div class="modal fade noselect" id="modalManageAccount" tabindex="-1" role="dialog"
+  aria-labelledby="modalManageAccountLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalManageAccountLabel">
+          <h4 class="card-title">
+            <i class="material-icons">
+              fiber_new
+            </i>
+            Manage Account
+          </h4>
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <div class="tab-container">
+          <ul class="nav nav-pills nav-pills-primary" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" data-toggle="tab" href="#changeName" role="tablist" aria-expanded="true">
+                <Span class="text-lower">Change Name</Span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#changePassword" role="tablist" aria-expanded="false">
+                <Span class="text-lower">Change Password</Span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="tab-content tab-space">
+
+          <div class="tab-pane active" id="changeName" aria-expanded="true">
+
+            <form autocomplete="off">
+
+              <div class="row">
+
+                <div class="col-md-6">
+                  <div class="form-group bmd-form-group">
+                    <label class="bmd-label-static">Full Name</label>
+                    <input type="text" class="form-control" [(ngModel)]="mChangeFullName" name="mChangeFullName">
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group bmd-form-group">
+                    <label class="bmd-label-floating">Password</label>
+                    <input type="password" class="form-control" [(ngModel)]="mConfirmNameChange"
+                      name="mConfirmNameChange">
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="text-center">
+                <small class="incorrect" [hidden]="showNameChangeError">{{nameChangeErrorMessage}}</small>
+              </div>
+
+              <div class="modal-footer">
+                <button type="reset" class="btn btn-secondary text-lower" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary text-lower"
+                  [disabled]="mChangeFullName=='' || mPersistFullName==mChangeFullName || disableSaveFullNameButton"
+                  (click)="changeFullName()">Save Name</button>
+              </div>
+
+            </form>
+
+          </div>
+
+          <div class="tab-pane" id="changePassword" aria-expanded="false">
+
+            <form autocomplete="off">
+
+              <div class="form-group bmd-form-group">
+                <label class="bmd-label-floating">Current Password</label>
+                <input type="password" class="form-control" [(ngModel)]="mCurrentPassword" name="mCurrentPassword">
+              </div>
+
+              <div class="row">
+
+                <div class="col-md">
+                  <div class="form-group bmd-form-group">
+                    <label class="bmd-label-floating">Password</label>
+                    <input type="text" class="form-control" [(ngModel)]="mNewPassword" name="mNewPassword">
+                  </div>
+                </div>
+
+                <div class="col-md">
+                  <div class="form-group bmd-form-group">
+                    <label class="bmd-label-floating">Re-type password</label>
+                    <input type="text" class="form-control" [(ngModel)]="mRetypePassword" name="mRetypePassword">
+                  </div>
+                </div>
+
+              </div>
+
+
+              <div class="text-center">
+                <small class="incorrect" [hidden]="showPasswordErrors">{{passwordChangeErrorMessage}}</small>
+              </div>
+
+
+              <div class="modal-footer">
+                <button type="reset" class="btn btn-secondary text-lower" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary text-lower"
+                  [disabled]="mRetypePassword!=mNewPassword || mRetypePassword == '' || mNewPassword == '' || mCurrentPassword == '' || disableChangePasswordButton"
+                  (click)="changePassword()">Save
+                  Password</button>
+              </div>
+
+            </form>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>

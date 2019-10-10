@@ -1,0 +1,70 @@
+.menu-container {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
+
+.card {
+    i {
+        vertical-align: text-bottom;
+    }
+
+    height: 12.8rem;
+
+    h4 {
+        width: 14rem;
+    }
+
+    transition: 0.3s;
+}
+
+.card:hover {
+    -webkit-box-shadow: 1px 5px 28px -1px rgba(255, 255, 255, 1);
+    -moz-box-shadow: 1px 5px 28px -1px rgba(255, 255, 255, 1);
+    box-shadow: 1px 5px 28px -1px rgba(255, 255, 255, 1);
+    transition: 0.3s;
+}
+
+.container {
+    padding-top: 3rem;
+}
+
+.row {
+    width: max-content;
+    margin: 0 auto;
+}
+
+.dropdown {
+    padding-top: 1rem;
+    padding-right: 3rem;
+    padding-left: 3rem;
+}
+
+.dropdown-toggle::after {
+    vertical-align: 0.155em;
+}
+
+.username {
+    font-weight: normal;
+    font-size: .8125rem;
+    margin: 0 0.3125rem;
+    min-width: 7rem;
+    padding: 0.625rem 1.25rem;
+    overflow: hidden;
+    line-height: 1.428571;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+}
+
+.item-center {
+    margin: 0 auto;
+
+    i {
+        font-size: 16px;
+    }
+}
+
+.user-icon {
+    font-size: 20px;
+    vertical-align: -5px;
+}

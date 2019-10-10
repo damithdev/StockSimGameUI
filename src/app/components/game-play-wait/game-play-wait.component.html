@@ -1,0 +1,66 @@
+<div class="modal fade backdrop-color noselect" id="modalWaitUnitllOtherPlayers" tabindex="-1" role="dialog"
+  aria-labelledby="modalWaitUnitllOtherPlayersLabel" aria-hidden="true" data-backdrop="false">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalWaitUnitllOtherPlayersLabel">
+          <b>Waiting for Other Players</b>
+        </h5>
+      </div>
+      <div class="modal-body">
+
+        <div class="container" style="display: none;">
+
+          <div class="row">
+
+            <div class="col-md-12">
+
+              <div class="player-thumbnail">
+                <div class="img-raised rounded-circle img-fluid circle circle-ripple  pointer ripple">
+                  <div class="title text-center name">
+                    <span>{{gameHoster.shortName}}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <p class="hoster text-center">Game Hoster : {{gameHoster.name}}</p>
+              </div>
+
+            </div>
+
+            <div class="available-players" *ngFor="let item of waitingPlayers">
+
+              <div>
+
+                <div class="player-thumbnail">
+                  <div class="img-raised rounded-circle img-fluid circle">
+                    <div class="title text-center name">
+                      <span>{{item.circleName}}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <p class="hoster text-center">{{item.name}}</p>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="container">
+          
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,64 @@
+.backdrop-color {
+    background-color: #01091ff2 !important;
+}
+
+.modal .modal-dialog {
+    margin-top: 8rem;
+    max-width: 75rem;
+}
+
+.player-thumbnail {
+    width: 6rem;
+    margin: 0 auto;
+}
+
+.circle {
+    height: 6rem;
+    background: linear-gradient(0deg, #66bb6a, #388e3c);
+}
+
+.circle-ripple {
+    animation: ripple 1.2s linear infinite;
+}
+
+@keyframes ripple {
+    0% {
+        box-shadow: 0 0 0 0 rgba(#65ff78, 0.3),
+            0 0 0 1em rgba(#65ff78, 0.3),
+
+    }
+
+    100% {
+        box-shadow: 0 0 0 1em rgba(#65ff78, 0.3),
+            0 0 0 3em rgba(#65ff78, 0.0),
+    }
+}
+
+.rotation {
+    animation: spin 4s linear infinite;
+}
+
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.name {
+    line-height: 6rem;
+
+    span {
+        font-size: 28px;
+        color: white;
+    }
+}
+
+.hoster {
+    font-size: 14px;
+    font-weight: 600;
+    padding-top: 8px;
+}
+
+.available-players {
+    min-width: 14rem;
+}

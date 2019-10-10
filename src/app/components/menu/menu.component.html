@@ -1,0 +1,110 @@
+<div class="menu-container noselect">
+
+  <div>
+
+    <div class="text-right">
+      <div class="dropdown pointer noselect">
+
+        <a class="dropdown-toggle text-white user" id="user" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false">
+          <span class="h6 text-lower">
+            <i class="material-icons user-icon">
+              insert_emoticon
+            </i>
+            {{name_log}} &nbsp;
+          </span>
+        </a>
+
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="user">
+          <p class="username text-center"> <span class="text-muted text-lower">Singed in as: </span> <br>
+            {{username_log}}
+          </p>
+          <div class="dropdown-divider"></div>
+          <button class="dropdown-item item-center pointer" type="button" (click)="signOut()">
+            <i class="material-icons">exit_to_app</i>&nbsp; Sign Out</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <particles [style]="particleStyle" [width]="width" [height]="height" [params]="particleParams"></particles>
+
+  <div class="row container">
+
+    <div class="col-md-4">
+
+      <div class="card pointer ripple" data-toggle="modal" data-target="#modalCreateNewGame">
+        <div class="card-body">
+          <h4 class="card-title">
+            <i class="material-icons">
+              fiber_new
+            </i>
+            Create new Game
+          </h4>
+          <h6 class="card-subtitle mb-2 text-muted text-lower">Click Here to Create New Game</h6>
+          <p class="card-text"></p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-md-4">
+
+      <div class="card pointer ripple" data-toggle="modal" (click)="onJoinGameOpen()">
+        <div class="card-body">
+          <h4 class="card-title">
+            <i class="material-icons">
+              videogame_asset
+            </i>
+            Join Game
+          </h4>
+          <h6 class="card-subtitle mb-2 text-muted text-lower">Click Here to Join Game</h6>
+          <p class="card-text"></p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-md-4">
+
+      <div class="card pointer ripple" data-toggle="modal" data-target="#modalMyStatistics">
+        <div class="card-body">
+          <h4 class="card-title">
+            <i class="material-icons">
+              linear_scale
+            </i>
+            My Statistics
+          </h4>
+          <h6 class="card-subtitle mb-2 text-muted text-lower">Click Here to View Statistics</h6>
+          <p class="card-text"></p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-md-4">
+
+      <div class="card pointer ripple" data-toggle="modal" data-target="#modalManageAccount">
+        <div class="card-body">
+          <h4 class="card-title">
+            <i class="material-icons">
+              verified_user
+            </i>
+            Manage Account
+          </h4>
+          <h6 class="card-subtitle mb-2 text-muted text-lower">Click Here to Manage Account</h6>
+          <p class="card-text"></p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<app-menu-create-game></app-menu-create-game>
+<app-menu-join-game [gameList]="iGameList"></app-menu-join-game>
+<app-menu-my-statistics></app-menu-my-statistics>
+<app-menu-manage-account></app-menu-manage-account>

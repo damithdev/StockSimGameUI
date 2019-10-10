@@ -1,0 +1,35 @@
+.noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.text-white {
+    color: white;
+}
+
+html,
+body {
+    margin: 0px;
+    height: 100%;
+}
+
+.text-lower {
+    text-transform: none;
+}
+
+
+.pointer {
+    cursor: pointer;
+}
+
+.default {
+    cursor: default;
+}
+
+.float-right {
+    float: right;
+}

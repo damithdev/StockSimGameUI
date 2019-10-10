@@ -1,0 +1,590 @@
+<div class="menu-container noselect">
+
+  <div class="row">
+
+    <div class="col-md-3">
+      <button class="btn btn-sm btn-warning btn-round" (click)="quitGame()">
+          <!-- data-toggle="tooltip" data-placement="right" title="{{quitGameToolTip}}" -->
+        <i class="material-icons">keyboard_backspace</i> Quit
+      </button>
+    </div>
+
+    <div class="col-md-3 text-center">
+      <button class="btn btn-sm btn-info btn-round" style="cursor: default !important">
+        <i class="material-icons">donut_large</i>&nbsp;&nbsp;<b>Turn :{{gameTurn}}</b>
+      </button>
+    </div>
+
+    <div class="col-md-3 text-center">
+      <button class="btn btn-sm btn-danger btn-round" style="cursor: default !important">
+        <i class="material-icons">timer</i>&nbsp;&nbsp;<b>{{timerMns}}:{{timerSecs}}</b>
+      </button>
+    </div>
+
+    <div class="col-md-3">
+      <button class="btn btn-sm btn-primary btn-round float-right" style="cursor: default !important">
+        <i class="material-icons">work</i> <b> {{playerTotal}} LKR</b>
+      </button>
+    </div>
+
+
+  </div>
+
+  <div class="row">
+
+    <div class="card col-md col-card-space">
+      <h5 class="title col-card-title">Share Market</h5>
+
+      <div class="asset-details">
+        <div class="row">
+
+          <div class="col-md" *ngFor="let item of sectors; let ind = index" style="width: fit-content;">
+            <!-- Card Open -->
+            <div class="card sector-card pointer ripple" [ngClass]="'bg-'+item.style"
+              (click)="showPurchaseModal(item,ind)">
+              <div class="card-body sector-card-body">
+                <h5 class="card-category card-category-social">
+                  <h5 class="title col-card-title text-white text-center" style="font-size: 14px;">
+                    <u>{{item.sectorName}}</u></h5>
+                </h5>
+                <div class="text-center">
+
+                  <h6 class="card-subtitle mb-2 text-white text-lower">
+                    <i class="material-icons" style="vertical-align: top ;font-size: 18px;">reorder</i> Stocks -
+                    <b>{{item.previewData.totalStockQuantity}}</b>
+                  </h6>
+
+                  <h6 class="card-subtitle mb-2 text-white text-lower">
+                    <i class="material-icons" style="vertical-align: top ;font-size: 18px;">trending_up</i>Avg. Rate -
+                    <b>{{item.previewData.averageStockRate}}</b>
+                  </h6>
+
+                </div>
+              </div>
+            </div>
+            <!-- Card Close -->
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <div class="card col-md col-card-space">
+      <h5 class="title col-card-title">Your Transactions</h5>
+      <div class="card">
+        <div class="card-body card-body-padding">
+
+          <h5 class="card-title">{{playerName}}</h5>
+
+          <div class="row">
+            <div class="col-md-6">
+              <h6 class="card-subtitle mb-2 text-muted">Start from - {{playerStartFrom}} LKR</h6>
+            </div>
+            <div class="col-md-6">
+              <h6 class="card-subtitle mb-2 text-muted">Current Income - {{playerCurrentIncome}} LKR</h6>
+            </div>
+          </div>
+
+          <div class="table-container">
+            <table class="table table-sm">
+              <thead>
+                <tr>
+                  <th scope="col">Turn</th>
+                  <th scope="col">Sector</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Qty</th>
+                  <th scope="col" data-toggle="tooltip" data-placement="top" title="Cost Per Stock">CPS</th>
+                  <th scope="col">Total</th>
+                  <th scope="col">Icome</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of playerTransactions">
+                  <th>{{item.turn}}</th>
+                  <th data-toggle="tooltip" data-placement="top" title="{{item.stockName}}">{{item.sector}}</th>
+                  <th class="status-style">
+                    <i class="material-icons" style="color: #19ce20" *ngIf="item.status==='SOLD'">
+                      add_circle
+                    </i>
+                    <i class="material-icons" style="color: #ef1515" *ngIf="item.status==='PURCHASED'">
+                      remove_circle
+                    </i>
+                  </th>
+                  <th>{{item.qty}}</th>
+                  <th>{{item.cps}}</th>
+                  <th>{{item.total}} LKR</th>
+                  <th>{{item.income}} LKR</th>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <marquee class="marquee-self-score" width="100%" direction="left">
+            <i class="material-icons">trending_up</i>
+            {{marqueeMessage1}}&nbsp;{{marqueeMessage2}}&nbsp;{{marqueeMessage3}}
+          </marquee>
+
+        </div>
+      </div>
+
+    </div>
+
+    <div class="card col-md col-card-space">
+      <h5 class="title col-card-title">Your Assets</h5>
+
+      <div class="asset-details">
+
+        <div class="row">
+
+          <div class="col-md" *ngFor="let item of yourAssets; let ind = index" style="width: fit-content;">
+
+            <div class="card sector-card pointer ripple" [ngClass]="item.style"
+              (click)="showSellingRateModal(item, ind)">
+              <div class="card-body sector-card-body">
+                <h5 class="card-category card-category-social">
+                  <h5 class="title col-card-title text-white text-center" style="font-size: 14px;">
+                    <u>{{item.sectorName}}</u></h5>
+                </h5>
+
+                <div class="text-center">
+
+                  <h6 class="card-subtitle mb-2 text-white text-lower">
+                    <i class="material-icons" style="vertical-align: top ;font-size: 18px;">reorder</i> Stocks -
+                    <b>{{item.previewData.totalStockQuantity}}</b>
+                  </h6>
+
+
+                  <h6 class="card-subtitle mb-2 text-white text-lower">
+                    <i class="material-icons" style="vertical-align: top ;font-size: 18px;">trending_up</i> Your Rate
+                    - <b>{{item.previewData.averageStockRate}} LKR</b>
+                  </h6>
+
+                </div>
+
+
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="row">
+
+
+    <div class="card col-md-4 col-2-space">
+      <h5 class="title col-card-title">Other Players Selling Rates | <small>Avg. Rates are in LKR</small></h5>
+
+      <marquee class="marquee-self-score" width="100%" direction="left">
+        <i class="material-icons">trending_up</i>
+        Your Item Selling Rate &nbsp; {{marqueeMessage3}}
+      </marquee>
+
+      <div class="table-container-selling-rates">
+        <table class="table table-sm table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Player</th>
+              <th scope="col">Finance</th>
+              <th scope="col">Technology</th>
+              <th scope="col">Consumer Service</th>
+              <th scope="col">Manufacturing</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="pointer" *ngFor="let item of otherPlayerMarket; let ind = index">
+              <th (click)="openBuyFromOthersModal(item,item.finance, 'Finance',ind)">{{item.playerName}}</th>
+              <th class="text-center" (click)="openBuyFromOthersModal(item,item.finance, 'Finance',ind)">
+                {{item.previewData.finance}}</th>
+              <th class="text-center" (click)="openBuyFromOthersModal(item,item.technology, 'Technology',ind)">
+                {{item.previewData.technology}}
+              </th>
+              <th class="text-center"
+                (click)="openBuyFromOthersModal(item,item.consumerService, 'Consumer Service',ind)">
+                {{item.previewData.consumerService}}</th>
+              <th class="text-center" (click)="openBuyFromOthersModal(item,item.manufaturing, 'Manufacturing',ind)">
+                {{item.previewData.manufaturing}}
+              </th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- <div class="card">
+        <div class="card-body card-body-padding">
+
+          <h5 class="card-title">{{myName}}</h5>
+
+          <div class="row">
+            <div class="col-md-6">
+              <h6 class="card-subtitle mb-2 text-muted">Start from - {{startFrom}} LKR</h6>
+            </div>
+            <div class="col-md-6">
+              <h6 class="card-subtitle mb-2 text-muted">Current Income - {{currentIncome}} LKR</h6>
+            </div>
+          </div>
+
+
+          <marquee class="marquee-self-score" width="100%" direction="left">
+            <i class="material-icons">trending_up</i> Try to earn more money by selling your shares
+          </marquee>
+
+        </div>
+      </div> -->
+
+    </div>
+
+    <div class="card col-md col-2-space">
+      <h5 class="title col-card-title">Stock Market Statistics</h5>
+      <canvas id="stockStaistics">{{stockMarketStatistics}}</canvas>
+    </div>
+
+
+  </div>
+
+</div>
+
+<div class="modal fade noselect" id="modalPurchaseStock" tabindex="-1" role="dialog"
+  aria-labelledby="purchaseStockLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="purchaseStockLabel">
+          <b>{{purchaseModalData.sectorName}}</b>
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <ul class="nav nav-pills tab-alignment" [ngClass]="'nav-pills-'+purchaseModalData.style" role="tablist">
+          <li class="nav-item pointer" *ngFor="let subData of purchaseModalData.data; let ind = index;"
+            (click)="setSectorSubData(subData)">
+            <a class="nav-link" [ngClass]="{'active': subData.stockName == sectorSubData.stockName}" role="tablist"
+              aria-expanded="true">
+              {{subData.stockName}}
+            </a>
+          </li>
+        </ul>
+
+        <div class="row text-center">
+          <div class="col-md-6">
+            <h6 class="title text-lower">
+              <i class="material-icons" style="vertical-align: top ;font-size: 18px;">reorder</i>
+              Stocks -
+              <b>{{sectorSubData.stocksQty}}</b>
+            </h6>
+          </div>
+
+          <div class="col-md-6">
+            <h6 class="title text-lower">
+              <i class="material-icons" style="vertical-align: top ;font-size: 18px;">trending_up</i> Rate -
+              <b>{{sectorSubData.ratePerQty}}&nbsp;LKR</b>
+            </h6>
+          </div>
+
+        </div>
+        <hr>
+        <div class="row">
+
+          <div class="col-md-4">
+            <div class="form-group bmd-form-group">
+              <label class="bmd-label-static">Stock Quantity</label>
+              <input type="number" class="form-control" name="mPurchaseStockQuantity"
+                [(ngModel)]="mPurchaseStockQuantity" (ngModelChange)="calculatePurchaseTotal(sectorSubData.ratePerQty)"
+                min="1">
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <h5 class="title text-center" style="margin-top: 2rem;">{{puchaseModalTotal}} LKR</h5>
+          </div>
+
+          <div class="col-md-4">
+            <button class="btn btn-sm btn-round text-lower" [ngClass]="'btn-'+purchaseModalData.style"
+              style="margin-top: 2rem;" (click)="makePurchase(sectorSubData,purchaseModalData.index)"
+              [disabled]="puchaseModalTotal>playerTotal || 0>=mPurchaseStockQuantity || mPurchaseStockQuantity>sectorSubData.stocksQty">
+              <i class="material-icons">add_shopping_cart</i> Purchase
+            </button>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary text-lower" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade noselect" id="modalSellStock" tabindex="-1" role="dialog" aria-labelledby="modalSellStockLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document" style="max-width: 40rem;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalSellStockLabel">
+          <b>Mark Sell Rate on 'Finance' Assets</b>
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+
+
+        <ul class="nav nav-pills tab-alignment" [ngClass]="'nav-pills-'+sellModalData.style" role="tablist">
+          <li class="nav-item pointer" *ngFor="let subData of sellModalData.data; let ind = index;"
+            (click)="setSellYourStockSubData(subData, ind)">
+            <a class="nav-link" [ngClass]="{'active': subData.stockName == yourAssetSubData.yourStockName}"
+              role="tablist" aria-expanded="true">
+              {{subData.stockName}}
+            </a>
+          </li>
+        </ul>
+
+
+        <div class="row">
+          <div class="col-md">
+            <h6 class="title text-lower">
+              <i class="material-icons" style="vertical-align: top ;font-size: 18px;">reorder</i>
+              Your Stocks -
+              <b>{{yourAssetSubData.yourStocks}} LKR</b>
+            </h6>
+          </div>
+          <div class="col-md">
+            <h6 class="title text-lower">
+              <i class="material-icons" style="vertical-align: top ;font-size: 18px;">trending_up</i>
+              Market Rate -
+              <b>{{yourAssetSubData.yourStockRate}} LKR</b>
+            </h6>
+          </div>
+          <div class="col-md">
+            <h6 class="title text-lower">
+              <i class="material-icons" style="vertical-align: top ;font-size: 18px;">playlist_add_check</i>
+              Net Worth -
+              <b>{{yourAssetSubData.yourStocks*yourAssetSubData.yourStockRate}} LKR</b>
+            </h6>
+          </div>
+        </div>
+
+        <hr>
+
+        <div class="row">
+
+          <div class="col-md-6">
+            <div class="form-group bmd-form-group">
+              <label class="bmd-label-floating">Sell Rate Per Stock in <b>LKR</b></label>
+              <input type="number" class="form-control" name="mSellingRate" [(ngModel)]="mSellingRate" min="1">
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group bmd-form-group text-right">
+              <div class="togglebutton">
+                <label>
+                  Start Selling
+                  <input type="checkbox" checked="" [(ngModel)]="mSellingStarted"
+                    (ngModelChange)="onChangeSellingStatus(sellModalData)">
+                  <span class="toggle"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary text-lower" data-dismiss="modal">Close</button>
+        &nbsp;
+        <button type="button" class="btn text-lower" [ngClass]="'btn-'+sellModalData.style"
+          (click)="saveSellingRate(sellModalData)" [disabled]="0>=mSellingRate">Save Rate</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade noselect" id="modalBuyFromOtherPlayers" tabindex="-1" role="dialog"
+  aria-labelledby="modalBuyFromOtherPlayersLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document" style="max-width: 40rem;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalSellStockLabel">
+          <b>Buy {{selectedPlayerMarket.sectorName}} Stocks from '{{selectedPlayerMarket.playerName}}'</b>
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <ul class="nav nav-pills tab-alignment nav-pills-danger" role="tablist">
+          <li class="nav-item pointer" *ngFor="let subData of selectedPlayerMarket.shareHolders; let ind = index;"
+            (click)="setStockData(subData, selectedPlayerMarket.index)" [hidden]="!subData.sellingStart">
+            <a class="nav-link" [ngClass]="{'active':subData.stockName == selectedPlayerStockRate.stockName}"
+              role="tablist" aria-expanded="true">
+              {{subData.stockName}}
+            </a>
+          </li>
+        </ul>
+
+        <div class="tab-content tab-space">
+
+          <div class="tab-pane active" aria-expanded="true">
+            <div class="row text-center">
+              <div class="col-md-6">
+                <h6 class="title text-lower">
+                  <i class="material-icons" style="vertical-align: top ;font-size: 18px;">reorder</i>
+                  Stocks -
+                  <b>{{selectedPlayerStockRate.stocksQty}}</b>
+                </h6>
+              </div>
+
+              <div class="col-md-6">
+                <h6 class="title text-lower">
+                  <i class="material-icons" style="vertical-align: top ;font-size: 18px;">trending_up</i> Rate -
+                  <b>{{selectedPlayerStockRate.ratePerQty}}&nbsp;LKR</b>
+                </h6>
+              </div>
+
+            </div>
+            <hr>
+            <div class="row" style="width: max-content;margin: 0 auto;">
+
+              <div class="col-md-4">
+                <div class="form-group bmd-form-group">
+                  <label class="bmd-label-floating">Stock Quantity</label>
+                  <input type="number" class="form-control" name="mQtyBuyingFromOtherPlayer"
+                    [(ngModel)]="mQtyBuyingFromOtherPlayer"
+                    (ngModelChange)="calculateOtherPlayersBuyingTotal(selectedPlayerStockRate.ratePerQty)" min="1">
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <h5 class="title text-center" style="margin-top: 2rem;">{{otherPlayerMarketTotal}} LKR</h5>
+              </div>
+
+              <div class="col-md-4">
+                <button class="btn btn-sm btn-danger btn-round text-lower" style="margin-top: 2rem;"
+                  (click)="makePurchaseFromOtherPlayer()"
+                  [disabled]="otherPlayerMarketTotal>playerTotal || 0>=mQtyBuyingFromOtherPlayer || mQtyBuyingFromOtherPlayer>selectedPlayerStockRate.ratePerQty">
+                  <i class="material-icons">add_shopping_cart</i> Purchase
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary text-lower" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="playerNotReadyToSell" tabindex="-1" role="dialog"
+  aria-labelledby="playerNotReadyToSellLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <h6 class="title text-lower" id="playerNotReadyToSellLabel">
+          <b>
+            Player '{{selectedPlayerMarket.playerName}}' Is Not Ready To Sell Any '{{selectedPlayerMarket.sectorName}}'
+            Stocks
+          </b>
+        </h6>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary text-lower" data-dismiss="modal">Dissmiss</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal modal-waiting-for-players fade backdrop-color noselect waiting-for-other-players"
+  id="modalWaitUnitllOtherPlayers" tabindex="-1" role="dialog" aria-labelledby="modalWaitUnitllOtherPlayersLabel"
+  aria-hidden="true" data-backdrop="false" style="overflow: auto">
+  <div class="modal-dialog modal-dialog-modal-waiting-for-players" role="document">
+    <div class="modal-content background-svg">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modalWaitUnitllOtherPlayersLabel" style="margin: 0 auto;display: inline-flex;">
+          <div class="spinner"></div>
+          <b>Waiting for Other Players ({{connectedPlayerCounter}})</b>
+        </h3>
+      </div>
+      <div class="modal-body">
+
+        <div class="container">
+
+          <div class="row">
+
+            <div class="col-md-12">
+
+              <div class="player-thumbnail" *ngIf="matchDetails.hoster" data-toggle="tooltip" data-placement="left"
+                title="Click to Start Match" (click)="startMatch()">
+                <div class="img-raised rounded-circle img-fluid circle circle-ripple  pointer ripple">
+                  <div class="title text-center name">
+                    <span>{{gameHosterDetail.shortName}}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="player-thumbnail" *ngIf="!matchDetails.hoster">
+                <div class="img-raised rounded-circle img-fluid circle circle-ripple">
+                  <div class="title text-center name">
+                    <span>{{gameHosterDetail.shortName}}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <p class="hoster text-center">{{gameHosterDetail.fullName}}</p>
+              </div>
+
+            </div>
+
+            <div class="available-players" *ngFor="let item of waitingPlayers">
+
+              <div>
+
+                <div class="player-thumbnail">
+                  <div class="img-raised rounded-circle img-fluid circle">
+                    <div class="title text-center name">
+                      <span>{{item.circleName}}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <p class="hoster text-center">{{item.name}}</p>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="container">
+        </div>
+
+      </div>
+      <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div> -->
+    </div>
+  </div>
+</div>

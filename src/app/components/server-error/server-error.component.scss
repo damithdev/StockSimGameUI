@@ -1,0 +1,46 @@
+.server-error {
+    min-height: 100%;
+    width: 100%;
+    // position: fixed;
+    //background-color: white;
+    background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNSIgaGVpZ2h0PSIxNSI+CjxyZWN0IHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCIgZmlsbD0iIzI4MjgyOCI+PC9yZWN0Pgo8Y2lyY2xlIGN4PSIzIiBjeT0iNC4zIiByPSIxLjgiIGZpbGw9IiMzOTM5MzkiPjwvY2lyY2xlPgo8Y2lyY2xlIGN4PSIzIiBjeT0iMyIgcj0iMS44IiBmaWxsPSJibGFjayI+PC9jaXJjbGU+CjxjaXJjbGUgY3g9IjEwLjUiIGN5PSIxMi41IiByPSIxLjgiIGZpbGw9IiMzOTM5MzkiPjwvY2lyY2xlPgo8Y2lyY2xlIGN4PSIxMC41IiBjeT0iMTEuMyIgcj0iMS44IiBmaWxsPSJibGFjayI+PC9jaXJjbGU+Cjwvc3ZnPg==");
+}
+
+.main-header{
+    h1{
+        margin-top: 0 !important;
+        padding-top: 30px !important;
+    }
+}
+
+.img-container {
+    padding-top: 2rem;
+}
+
+img {
+    width: 40rem;
+    background-size: cover;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.developers-photo {
+    width: 8rem;
+    height: 8rem !important;
+    border-radius: 5rem;
+}
+
+i {
+    vertical-align: sub;
+    color: #ffc000;
+    font-size: 44px;
+}
+
+.error-detail {
+    padding-top: 3rem;
+
+    h5 {
+        margin-bottom: 0 !important;
+    }
+}
